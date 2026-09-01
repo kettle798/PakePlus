@@ -50,20 +50,36 @@ const createNotes = (title, content, okText, openUrl) => {
 }
 
 const initNotes = async () => {
-    const ppnotesJson = await fetch('/ppnotes.json')
+    const ppnotesJson = await fetch(
+        'https://file.pacbao.com/pakeplus/ppnotes.json'
+    )
     const ppnotesJsonData = await ppnotesJson.json()
     console.log('ppnotesJsonData', ppnotesJsonData)
-    const isChinese = window.location.href.includes('zh')
-    const contentValue = isChinese ? ppnotesJsonData.zh : ppnotesJsonData.en
-    const titleValue = isChinese ? 'PackPlus公告' : 'PakePlus Notice'
+    const urlHref = window.location.href
+    const isChinese = urlHref.includes('zh')
+    const ppPathName = window.location.pathname
+    const contentValue = isChinese
+        ? ppnotesJsonData.zh.note
+        : ppnotesJsonData.en.note
+    const titleValue = isChinese ? 'PakePlus公告' : 'PakePlus Notice'
     const okTextValue = isChinese ? '确定' : 'OK'
-    if (ppnotesJsonData.show) {
-        createNotes(
-            titleValue,
-            contentValue,
-            okTextValue,
-            ppnotesJsonData.openUrl
-        )
+    if (
+        (ppnotesJsonData.webShow && ppPathName === '/zh/') ||
+        ppPathName === '/'
+    ) {
+        contentValue &&
+            localStorage.getItem('note') !== contentValue &&
+            createNotes(
+                titleValue,
+                contentValue,
+                okTextValue,
+                ppnotesJsonData.openUrl
+            )
+        if (ppnotesJsonData.repeatShow) {
+            console.log('repeatShow note')
+        } else {
+            localStorage.setItem('note', contentValue)
+        }
     } else {
         console.log('ppnotesJsonData.show is false')
     }

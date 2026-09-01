@@ -1,8 +1,6 @@
 use crate::command::model::ServerState;
 use base64::prelude::*;
-use futures::StreamExt;
 use notify_rust::Notification;
-use reqwest::Client;
 use serde::Serialize;
 use std::env;
 use std::fs;
@@ -20,7 +18,7 @@ use tauri::WindowEvent;
 use tauri::{
     path::BaseDirectory, utils::config::WindowConfig, AppHandle, Emitter, LogicalSize, Manager,
 };
-use tauri_plugin_http::reqwest;
+use tauri_plugin_http::reqwest::Client;
 use walkdir::WalkDir;
 use warp::Filter;
 use zip::write::FileOptions;
@@ -29,13 +27,15 @@ use zip::ZipWriter;
 
 #[tauri::command]
 pub async fn start_server(
+    app: AppHandle,
     state: tauri::State<'_, Arc<Mutex<ServerState>>>,
     path: String,
     port: u16,
 ) -> Result<u16, String> {
     let mut state = state.lock().unwrap();
-    if state.server_handle.is_some() {
-        return Err("Server is already running".into());
+    // if server is running, stop it
+    if let Some(handle) = state.server_handle.take() {
+        handle.abort();
     }
     let path_clone = path.clone();
     // if port is 0, find a free port
@@ -46,7 +46,32 @@ pub async fn start_server(
     };
     // println!("port: {}", port);
     let server_handle = tokio::spawn(async move {
-        let route = warp::fs::dir(path_clone)
+        let static_files = warp::fs::dir(path_clone);
+
+        let oauth_callback = warp::path("callback")
+            .and(warp::query::<std::collections::HashMap<String, String>>())
+            .map(move |params: std::collections::HashMap<String, String>| {
+                // println!("OAuth params: {:?}", params);
+                let _ = app.emit("callback", serde_json::json!(params));
+                // return a simple page
+                warp::reply::html(format!(
+                    r#"
+                <html>
+                    <body>
+                        <h2>Login Success ✅</h2>
+                        <p>You can close this window.</p>
+                        <script>
+                            window.close();
+                        </script>
+                    </body>
+                </html>
+                "#
+                ))
+            });
+
+        // routes
+        let routes = oauth_callback
+            .or(static_files)
             .map(|reply| {
                 warp::reply::with_header(
                     reply,
@@ -58,7 +83,8 @@ pub async fn start_server(
             .map(|reply| warp::reply::with_header(reply, "Surrogate-Control", "no-store"))
             .map(|reply| warp::reply::with_header(reply, "Pragma", "no-cache"))
             .map(|reply| warp::reply::with_header(reply, "Expires", "0"));
-        warp::serve(route).run(([127, 0, 0, 1], port)).await;
+        // start server
+        warp::serve(routes).run(([127, 0, 0, 1], port)).await;
     });
     state.server_handle = Some(server_handle);
     Ok(port)
@@ -319,11 +345,10 @@ pub async fn download_file(
         }
     }
     let total_size = resp.content_length();
-    let mut stream = resp.bytes_stream();
+    let mut resp = resp;
     let mut file = File::create(&save_path).map_err(|e| e.to_string())?;
     let mut downloaded: u64 = 0;
-    while let Some(chunk) = stream.next().await {
-        let chunk = chunk.map_err(|e| e.to_string())?;
+    while let Some(chunk) = resp.chunk().await.map_err(|e| e.to_string())? {
         file.write_all(&chunk).map_err(|e| e.to_string())?;
         downloaded += chunk.len() as u64;
         app.emit(
@@ -334,7 +359,7 @@ pub async fn download_file(
                 total: total_size.unwrap_or(0),
             },
         )
-        .unwrap();
+        .map_err(|e| e.to_string())?;
     }
     Ok(())
 }

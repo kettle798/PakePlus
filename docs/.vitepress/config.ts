@@ -1,5 +1,7 @@
 import { defineConfig } from 'vitepress'
 
+const SITE_URL = 'https://pakeplus.com'
+
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
     title: 'PakePlus',
@@ -152,6 +154,7 @@ export default defineConfig({
                         { text: 'Sponsor Us', link: '/sponsor/' },
                         { text: 'Sponsor List', link: '/sponsor/list' },
                         { text: 'Sponsor Company', link: '/sponsor/company' },
+                        { text: 'Rewards', link: '/sponsor/active' },
                     ],
                 },
                 // 社交链接
@@ -240,13 +243,32 @@ export default defineConfig({
                                 { text: '下载软件', link: '/zh/guide/down' },
                                 { text: '获取Token', link: '/zh/guide/token' },
                                 { text: '创建项目', link: '/zh/guide/creat' },
+                            ],
+                        },
+                        {
+                            text: '桌面端打包',
+                            collapsed: false,
+                            items: [
                                 { text: '简单配置', link: '/zh/guide/config' },
-                                { text: 'APP配置', link: '/zh/guide/phone' },
+                                {
+                                    text: 'Electron版本',
+                                    link: '/zh/guide/electron',
+                                },
                                 {
                                     text: '本地打包',
                                     link: '/zh/guide/easylocal',
                                 },
                                 { text: '云端打包', link: '/zh/guide/build' },
+                                { text: '发布成功', link: '/zh/guide/success' },
+                                { text: '在线网站', link: '/zh/guide/gitpage' },
+                            ],
+                        },
+                        {
+                            text: '移动端打包',
+                            collapsed: false,
+                            items: [
+                                { text: 'APP配置', link: '/zh/guide/phone' },
+                                { text: 'iOS免签', link: '/zh/guide/webclip' },
                                 { text: '发布成功', link: '/zh/guide/success' },
                             ],
                         },
@@ -254,10 +276,21 @@ export default defineConfig({
                             text: '进阶配置',
                             collapsed: false,
                             items: [
-                                { text: '桌面端配置', link: '/zh/guide/tauri' },
                                 {
-                                    text: '移动端配置',
-                                    link: '/zh/guide/appconfig',
+                                    text: '桌面窗口配置',
+                                    link: '/zh/guide/tauri',
+                                },
+                                {
+                                    text: '桌面软件设置',
+                                    link: '/zh/guide/pcconfig',
+                                },
+                                {
+                                    text: '移动APP设置',
+                                    link: '/zh/guide/appseting',
+                                },
+                                {
+                                    text: '移动APP权限',
+                                    link: '/zh/guide/apppermission',
                                 },
                             ],
                         },
@@ -319,6 +352,10 @@ export default defineConfig({
                                     link: '/zh/question/vue',
                                 },
                                 { text: '窗口跳转', link: '/zh/question/jump' },
+                                {
+                                    text: '演示网站',
+                                    link: '/zh/question/webDemo',
+                                },
                             ],
                         },
                         {
@@ -326,7 +363,11 @@ export default defineConfig({
                             collapsed: false,
                             items: [
                                 {
-                                    text: '开启调试',
+                                    text: '桌面端debug',
+                                    link: '/zh/question/pcdebug',
+                                },
+                                {
+                                    text: '移动端debug',
                                     link: '/zh/question/debug',
                                 },
                             ],
@@ -349,7 +390,11 @@ export default defineConfig({
                                     text: '其他问题',
                                     link: '/zh/question/other',
                                 },
-                                { text: 'Issue', link: '/zh/question/issue' },
+                                {
+                                    text: '提交Bug',
+                                    link: '/zh/question/issue',
+                                },
+                                { text: '谨防诈骗', link: '/zh/question/liar' },
                             ],
                         },
                     ],
@@ -363,6 +408,7 @@ export default defineConfig({
                         { text: '赞助我们', link: '/zh/sponsor/' },
                         { text: '赞助者列表', link: '/zh/sponsor/list' },
                         { text: '赞助商名单', link: '/zh/sponsor/company' },
+                        { text: '感恩回馈', link: '/zh/sponsor/active' },
                     ],
                 },
                 // 社交链接
@@ -400,13 +446,84 @@ export default defineConfig({
                 // footer
                 footer: {
                     message: 'Released under the MIT License.',
-                    copyright: 'Copyright © 2019-present 1024小神',
+                    copyright: 'Copyright © 2025-present 1024xiaoshen',
                 },
             },
         },
     },
+    sitemap: {
+        hostname: SITE_URL,
+    },
     head: [
         ['link', { rel: 'icon', href: 'https://files.pakeplus.com/app.svg' }],
+        ['link', { rel: 'canonical', href: SITE_URL }],
+        // Open Graph
+        ['meta', { property: 'og:type', content: 'website' }],
+        ['meta', { property: 'og:site_name', content: 'PakePlus' }],
+        ['meta', { property: 'og:url', content: SITE_URL }],
+        [
+            'meta',
+            {
+                property: 'og:image',
+                content: 'https://files.pakeplus.com/app.webp',
+            },
+        ],
+        ['meta', { property: 'og:image:width', content: '1200' }],
+        ['meta', { property: 'og:image:height', content: '630' }],
+        // Twitter Card
+        ['meta', { name: 'twitter:card', content: 'summary_large_image' }],
+        ['meta', { name: 'twitter:site', content: '@1024xiaoshen' }],
+        ['meta', { name: 'twitter:creator', content: '@1024xiaoshen' }],
+        [
+            'meta',
+            {
+                name: 'twitter:image',
+                content: 'https://files.pakeplus.com/app.webp',
+            },
+        ],
+        // Additional SEO
+        ['meta', { name: 'author', content: 'PakePlus' }],
+        [
+            'meta',
+            {
+                name: 'robots',
+                content: 'index, follow, max-image-preview:large',
+            },
+        ],
+        ['meta', { name: 'googlebot', content: 'index, follow' }],
+        // JSON-LD Structured Data
+        [
+            'script',
+            { type: 'application/ld+json' },
+            JSON.stringify({
+                '@context': 'https://schema.org',
+                '@type': 'SoftwareApplication',
+                name: 'PakePlus',
+                url: SITE_URL,
+                description:
+                    'Package HTML/Web/Vue/React projects into Desktop/Mobile Apps in minutes. Open source free packaging tool.',
+                applicationCategory: 'DeveloperApplication',
+                operatingSystem: 'Windows, macOS, Linux, Android, iOS',
+                offers: {
+                    '@type': 'Offer',
+                    price: '0',
+                    priceCurrency: 'USD',
+                },
+                author: {
+                    '@type': 'Person',
+                    name: '1024xiaoshen',
+                    url: 'https://github.com/Sjj1024',
+                },
+                publisher: {
+                    '@type': 'Organization',
+                    name: 'PakePlus',
+                    logo: {
+                        '@type': 'ImageObject',
+                        url: 'https://files.pakeplus.com/app.svg',
+                    },
+                },
+            }),
+        ],
         [
             'script',
             {},
@@ -420,6 +537,34 @@ export default defineConfig({
         ],
         ['script', { src: '/ppweb.js', type: 'module' }],
     ],
+    // Dynamically inject per-page SEO meta tags
+    transformPageData(pageData) {
+        const isZh = pageData.relativePath.startsWith('zh/')
+        const canonicalUrl = `${SITE_URL}/${pageData.relativePath}`
+            .replace(/index\.md$/, '')
+            .replace(/\.md$/, '.html')
+        const title =
+            pageData.frontmatter.title || (isZh ? 'PakePlus' : 'PakePlus')
+        const description =
+            pageData.frontmatter.description ||
+            (isZh
+                ? '打包HTML/网页/Vue/React项目为桌面/手机应用只需几分钟，官方开源免费打包工具'
+                : 'Package HTML/Web/Vue/React projects into Desktop/Mobile Apps in minutes, open source free packaging tool')
+        pageData.frontmatter.head = [
+            ...(pageData.frontmatter.head || []),
+            ['link', { rel: 'canonical', href: canonicalUrl }],
+            ['meta', { property: 'og:title', content: title }],
+            ['meta', { property: 'og:description', content: description }],
+            ['meta', { property: 'og:url', content: canonicalUrl }],
+            [
+                'meta',
+                { property: 'og:locale', content: isZh ? 'zh_CN' : 'en_US' },
+            ],
+            ['meta', { name: 'twitter:title', content: title }],
+            ['meta', { name: 'twitter:description', content: description }],
+            ['meta', { name: 'description', content: description }],
+        ]
+    },
     themeConfig: {
         search: {
             provider: 'local',

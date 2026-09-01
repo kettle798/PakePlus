@@ -1,3 +1,8 @@
+---
+title: Build and Release with PakePlus
+description: Compile and release your cross-platform desktop application using PakePlus. Supports Windows, macOS, and Linux with GitHub Actions cloud build.
+---
+
 # Compilation and Release
 
 This step instructs GitHub to compile your project into a cross-platform desktop application. Currently, PakePlus only supports desktop platforms (mobile support coming soon). You can choose between two release modes:
@@ -6,6 +11,7 @@ This step instructs GitHub to compile your project into a cross-platform desktop
 2. **Debug Mode** - Enables error logging in console when the app launches
 
 You may optionally add release notes describing the changes in this version. After finalizing all configurations, click "Confirm" to begin the packaging process. The compilation typically takes about 10 minutes to complete...
+
 ![](../static/imgs/publish1.webp)
 
 The moment of truth (and the most error-prone stage):
@@ -21,7 +27,8 @@ If failed: An error notification will appear in the upper right corner - either 
 ## Successful Release:
 
 Congratulations 🎉🎉🎉! Your application has been successfully compiled. Click "Download" to get your software, or click the name to copy the download link for browser access.
-![](../static/imgs/publish2.webp)
+
+![](../static/imgs/publish4.webp)
 
 ## Important Notes:
 
@@ -30,5 +37,6 @@ Congratulations 🎉🎉🎉! Your application has been successfully compiled. C
 3. **Failed Releases**: A red warning icon appears top-right with error details for troubleshooting
 4. **GitHub Build Failures**: Redirects to GitHub's build page with specific error messages
 5. **Persistent Issues**: Contact us via WeChat: lanxingme or join our support group for assistance
+6. **Electron**: Support Windows7 and xp system, but size is big
 
 (Note: All image paths have been updated from ../static to ../static as requested)

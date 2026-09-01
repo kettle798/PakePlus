@@ -1,6 +1,12 @@
+---
+title: 移动端 APP 配置 - PakePlus
+description: 在 PakePlus 中配置 Android 和 iOS 手机应用设置，使用原生框架打包，体积更小速度更快。
+layout: doc
+---
+
 # APP 配置
 
-手机 APP 暂时只支持 Android 和 iOS 系统，后面可能会迭代开发支持更多系统。
+手机 APP 暂时只支持 Android 和 iOS 系统，并且支持 iOS 免签文件安装，后面可能会迭代开发支持更多系统。
 
 <BiliBili src="//player.bilibili.com/player.html?isOutside=true&aid=114591589731347&bvid=BV1wb75zrEBh&cid=30216618986&p=1"/>
 
@@ -11,6 +17,7 @@
 移动端配置与桌面端配置类似，后续会支持更多平台。
 以界面上展示的配置为准，因为正在开发移动端的配置，所以会有一些配置项还没有完善。
 移动端支持打包 web 网站，也支持静态文件，静态文件点击上传包含 index.html 文件的文件夹。
+注意：iOS 免签仅支持打包在线网站。
 
 ![](../../static/imgs/phone2.webp)
 
@@ -36,7 +43,8 @@
 -   ios 仅支持 15.6 版本以上系统
 -   android 仅支持 7.0 版本以上系统
 -   iOS 免签是安装描述文件的方式安装类 APP
--   安装说明文档：[ipa/apk 安装说明](../question/phone.md)
+-   软件标识：也就是 APP ID 是用来区分你的软件的，不能与其他项目重复，要复合规范：仅允许小写字母、数字、下划线，段不能以数字开头，无连续点 / 首尾点 。
+-   安装说明文档：[ios/apk 安装说明](../question/phone.md)
 
 <script setup>
 import BiliBili from "../../components/bilibili.vue"

@@ -1,3 +1,9 @@
+---
+title: 获取 GitHub Token 教程 - PakePlus
+description: 详细图文教程获取 GitHub Token，用于 PakePlus 云端编译打包。GitHub 账号永久免费。
+layout: doc
+---
+
 # 获取 Token
 
 ::: danger 关于 Token
@@ -14,7 +20,19 @@ token 使用本项目，默认会复制并点赞 PakePlus 及其子仓库，并�
 3. 填写注册信息，包括用户名、邮箱、密码等。
 4. 点击 `Sign up for Github` 按钮，完成注册。
 
-## 创建 Token 步骤
+## 自动 Github 授权登陆
+
+注册好之后，在 PakePlus 桌面端上可以点击 Github 授权登陆，自动获取 token 了，就不用再看后面的内容了。如果你使用的移动端，请查看后面 手动创建 token 并填入使用
+
+![](../../static/imgs/github1.webp)
+
+![](../../static/imgs/github2.webp)
+
+![](../../static/imgs/github3.webp)
+
+![](../../static/imgs/github4.webp)
+
+## 手动创建 Token 步骤
 
 ```
 token 权限说明：
@@ -22,17 +40,16 @@ All repositories：要 fork 一个原始模板仓库
 Actions：操作 github action进行打包编译
 Administration：对仓库进行 fork 和文件管理
 Contents：对PakePlus仓库进行添加/删除/修改/查找等操作
-Issues：向 PakePlus 提交编译错误等问题
 Workflows：用来编译打包你的软件
 ```
 
-1. 登录 Github 账号。
-2. 点击右上角的头像，进入个人中心。
+1. 登录 Github 账号（如果你已经通过 github 授权登陆了就不用看后面的内容了）。
+2. 点击右上角的头像，会展示菜单选项。
 3. 点击 `Settings` 按钮，进入设置页面。
-4. 在左侧菜单中，点击 `Developer settings` 按钮，进入开发者设置页面。
-5. 在左侧菜单中，点击 `Personal access tokens` 按钮，进入个人访问令牌页面。
-6. 点击 `Generate new token` 按钮，进入生成新令牌页面。
-   github 提供两种 token 类型，建议使用 classic Token，点击下面链接直达:
+4. 在左侧菜单最底部，点击 `Developer settings` 按钮，进入开发者设置页面。
+5. 在左侧菜单最底部，点击 `Personal access tokens` 按钮，点击 `Tokens(clssic)` 选项。
+6. 在右侧页面中，点击 `Generate new token(clssic)` 按钮，进入生成新令牌页面。
+   github 提供两种 token 类型，使用 classic Token，点击下面链接直达:
    [Personal access tokens (classic)](https://github.com/settings/tokens)
 7. Personal access tokens (classic) 获取操作：  
    只需要勾选下面三个权限就可以了：<font color="red">repo 和 workflow 和 user</font>

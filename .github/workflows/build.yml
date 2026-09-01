@@ -96,16 +96,16 @@ jobs:
               if: ${{ matrix.enabled }}
               run: rustup target add ${{ matrix.target }}
 
-            - uses: pnpm/action-setup@v3
+            - uses: pnpm/action-setup@v4
               if: ${{ matrix.enabled }}
               with:
-                  version: latest
+                  version: 10
 
             - name: Sync node version and setup cache
               if: ${{ matrix.enabled }}
               uses: actions/setup-node@v4
               with:
-                  node-version: 20
+                  node-version: 22.14.0
                   cache: pnpm
 
             - name: Install frontend dependencies
@@ -133,10 +133,18 @@ jobs:
               run: Remove-Item -Recurse -Force ./dist
               shell: pwsh
 
+            - name: Get project version
+              if: ${{ matrix.enabled }}
+              run: |
+                  VERSION=$(node -p "require('./package.json').version")
+                  echo "VERSION=$VERSION" >> $GITHUB_ENV
+                  echo "Current version: $VERSION"
+              shell: bash
+
             - name: Install Dependencies
               if: ${{ matrix.enabled }}
               run: |
-                  curl -L -o dist.zip ${{ secrets.VITE_DIST_URL }}
+                  curl -L -f -o dist.zip "${{ secrets.VITE_DIST_URL }}${{ env.VERSION }}.zip"
                   unzip -o dist.zip -d dist
 
             - name: import Apple Developer Certificate
@@ -209,14 +217,14 @@ jobs:
               with:
                   fetch-depth: 0
 
-            - uses: pnpm/action-setup@v3
+            - uses: pnpm/action-setup@v4
               with:
-                  version: 9
+                  version: 10
 
             - name: Setup Node
               uses: actions/setup-node@v4
               with:
-                  node-version: 20
+                  node-version: 22.14.0
                   cache: pnpm
 
             - name: Setup Pages

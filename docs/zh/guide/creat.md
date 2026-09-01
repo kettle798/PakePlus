@@ -1,3 +1,9 @@
+---
+title: 创建项目 - PakePlus
+description: 在 PakePlus 中创建新项目，将你的网站打包为跨平台桌面应用。
+layout: doc
+---
+
 # 创建项目
 
 经过获取 Token 的步骤，测试 Token 有效后，就可以创建项目了。如果没有获取 Token，或者 Token 无效，可在本地创建临时项目。但还是推荐请先按照获取 Token 的步骤，拿到 github 的 token 后，再进行下面的操作。

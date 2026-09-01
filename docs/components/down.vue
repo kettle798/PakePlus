@@ -1,6 +1,6 @@
 <template>
     <div class="downBox">
-        <div class="title">{{ langMap[lang].titleTips }}</div>
+        <div class="title">{{ lastRelease.name }}</div>
         <div
             class="platform mac"
             :style="
@@ -29,26 +29,26 @@
                 <h1 class="title">MacOS</h1>
                 <div class="item">
                     <span>{{ langMap[lang].mostPopular }}</span>
-                    <a :href="proxyGithub(macArm.browser_download_url, 5)">
+                    <a :href="proxyGithub(macArm?.browser_download_url, 5)">
                         Apple Silicon({{ langMap[lang].fastLink }})
                     </a>
                     <a
                         v-if="!isMobile() && isDownPage()"
-                        :href="proxyGithub(macArm.browser_download_url, 4)"
+                        :href="proxyGithub(macArm?.browser_download_url, 4)"
                         class="githubLink"
                     >
                         {{ langMap[lang].speed2 }}
                     </a>
                     <a
                         v-if="!isMobile() && isDownPage()"
-                        :href="proxyGithub(macArm.browser_download_url, 3)"
+                        :href="proxyGithub(macArm?.browser_download_url, 3)"
                         class="githubLink"
                     >
                         {{ langMap[lang].speed3 }}
                     </a>
                     <a
                         v-if="!isMobile()"
-                        :href="macArm.browser_download_url"
+                        :href="macArm?.browser_download_url"
                         class="githubLink"
                     >
                         {{ langMap[lang].gitlink }}
@@ -56,24 +56,24 @@
                 </div>
                 <div v-if="!isMobile()" class="item">
                     <span>{{ langMap[lang].oldSystem }}</span>
-                    <a :href="proxyGithub(macX64.browser_download_url, 5)">
+                    <a :href="proxyGithub(macX64?.browser_download_url, 5)">
                         Intel X64({{ langMap[lang].fastLink }})
                     </a>
                     <a
                         v-if="!isMobile() && isDownPage()"
-                        :href="proxyGithub(macX64.browser_download_url, 4)"
+                        :href="proxyGithub(macX64?.browser_download_url, 4)"
                         class="githubLink"
                     >
                         {{ langMap[lang].speed2 }}
                     </a>
                     <a
                         v-if="!isMobile() && isDownPage()"
-                        :href="proxyGithub(macX64.browser_download_url, 3)"
+                        :href="proxyGithub(macX64?.browser_download_url, 3)"
                         class="githubLink"
                     >
                         {{ langMap[lang].speed3 }}
                     </a>
-                    <a :href="macX64.browser_download_url" class="githubLink">
+                    <a :href="macX64?.browser_download_url" class="githubLink">
                         {{ langMap[lang].gitlink }}
                     </a>
                 </div>
@@ -113,26 +113,26 @@
                 <h1 class="title">Windows</h1>
                 <div class="item">
                     <span>{{ langMap[lang].mostPopular }}</span>
-                    <a :href="proxyGithub(windowsX64.browser_download_url, 5)">
+                    <a :href="proxyGithub(windowsX64?.browser_download_url, 5)">
                         X64 ({{ langMap[lang].fastLink }})
                     </a>
                     <a
                         v-if="!isMobile() && isDownPage()"
-                        :href="proxyGithub(windowsX64.browser_download_url, 4)"
+                        :href="proxyGithub(windowsX64?.browser_download_url, 4)"
                         class="githubLink"
                     >
                         {{ langMap[lang].speed2 }}
                     </a>
                     <a
                         v-if="!isMobile() && isDownPage()"
-                        :href="proxyGithub(windowsX64.browser_download_url, 3)"
+                        :href="proxyGithub(windowsX64?.browser_download_url, 3)"
                         class="githubLink"
                     >
                         {{ langMap[lang].speed3 }}
                     </a>
                     <a
                         v-if="!isMobile()"
-                        :href="windowsX64.browser_download_url"
+                        :href="windowsX64?.browser_download_url"
                         class="githubLink"
                     >
                         {{ langMap[lang].gitlink }}
@@ -142,7 +142,7 @@
                     <span>{{ langMap[lang].rarelyUsed }}</span>
                     <a
                         :href="
-                            proxyGithub(windowsArm64.browser_download_url, 5)
+                            proxyGithub(windowsArm64?.browser_download_url, 5)
                         "
                     >
                         ARM64 ({{ langMap[lang].fastLink }})
@@ -150,7 +150,7 @@
                     <a
                         v-if="!isMobile() && isDownPage()"
                         :href="
-                            proxyGithub(windowsArm64.browser_download_url, 4)
+                            proxyGithub(windowsArm64?.browser_download_url, 4)
                         "
                         class="githubLink"
                     >
@@ -159,7 +159,7 @@
                     <a
                         v-if="!isMobile() && isDownPage()"
                         :href="
-                            proxyGithub(windowsArm64.browser_download_url, 3)
+                            proxyGithub(windowsArm64?.browser_download_url, 3)
                         "
                         class="githubLink"
                     >
@@ -167,7 +167,7 @@
                     </a>
                     <a
                         v-if="!isMobile()"
-                        :href="windowsArm64.browser_download_url"
+                        :href="windowsArm64?.browser_download_url"
                         class="githubLink"
                     >
                         {{ langMap[lang].gitlink }}
@@ -208,26 +208,26 @@
                 <h1 class="title">Linux</h1>
                 <div class="item">
                     <span>{{ langMap[lang].mostPopular }}</span>
-                    <a :href="proxyGithub(linuxDeb.browser_download_url, 5)">
+                    <a :href="proxyGithub(linuxDeb?.browser_download_url, 5)">
                         deb({{ langMap[lang].fastLink }})
                     </a>
                     <a
                         v-if="!isMobile() && isDownPage()"
-                        :href="proxyGithub(linuxDeb.browser_download_url, 4)"
+                        :href="proxyGithub(linuxDeb?.browser_download_url, 4)"
                         class="githubLink"
                     >
                         {{ langMap[lang].speed2 }}
                     </a>
                     <a
                         v-if="!isMobile() && isDownPage()"
-                        :href="proxyGithub(linuxDeb.browser_download_url, 3)"
+                        :href="proxyGithub(linuxDeb?.browser_download_url, 3)"
                         class="githubLink"
                     >
                         {{ langMap[lang].speed3 }}
                     </a>
                     <a
                         v-if="!isMobile()"
-                        :href="linuxDeb.browser_download_url"
+                        :href="linuxDeb?.browser_download_url"
                         class="githubLink"
                     >
                         {{ langMap[lang].gitlink }}
@@ -235,48 +235,51 @@
                 </div>
                 <div v-if="!isMobile()" class="item">
                     <span>{{ langMap[lang].mostPopular }}</span>
-                    <a :href="proxyGithub(linuxRpm.browser_download_url, 5)">
+                    <a :href="proxyGithub(linuxRpm?.browser_download_url, 5)">
                         rpm({{ langMap[lang].fastLink }})
                     </a>
                     <a
                         v-if="!isMobile() && isDownPage()"
-                        :href="proxyGithub(linuxRpm.browser_download_url, 4)"
+                        :href="proxyGithub(linuxRpm?.browser_download_url, 4)"
                         class="githubLink"
                     >
                         {{ langMap[lang].speed2 }}
                     </a>
                     <a
                         v-if="!isMobile() && isDownPage()"
-                        :href="proxyGithub(linuxRpm.browser_download_url, 3)"
+                        :href="proxyGithub(linuxRpm?.browser_download_url, 3)"
                         class="githubLink"
                     >
                         {{ langMap[lang].speed3 }}
                     </a>
-                    <a :href="linuxRpm.browser_download_url" class="githubLink">
+                    <a
+                        :href="linuxRpm?.browser_download_url"
+                        class="githubLink"
+                    >
                         {{ langMap[lang].gitlink }}
                     </a>
                 </div>
                 <div v-if="!isMobile()" class="item">
                     <span>{{ langMap[lang].largeVolume }}</span>
-                    <a :href="proxyGithub(linuxImage.browser_download_url, 5)">
+                    <a :href="proxyGithub(linuxImage?.browser_download_url, 5)">
                         AppImage({{ langMap[lang].fastLink }})
                     </a>
                     <a
                         v-if="!isMobile() && isDownPage()"
-                        :href="proxyGithub(linuxImage.browser_download_url, 4)"
+                        :href="proxyGithub(linuxImage?.browser_download_url, 4)"
                         class="githubLink"
                     >
                         {{ langMap[lang].speed2 }}
                     </a>
                     <a
                         v-if="!isMobile() && isDownPage()"
-                        :href="proxyGithub(linuxImage.browser_download_url, 3)"
+                        :href="proxyGithub(linuxImage?.browser_download_url, 3)"
                         class="githubLink"
                     >
                         {{ langMap[lang].speed3 }}
                     </a>
                     <a
-                        :href="linuxImage.browser_download_url"
+                        :href="linuxImage?.browser_download_url"
                         class="githubLink"
                     >
                         {{ langMap[lang].gitlink }}
@@ -347,17 +350,27 @@
                         https://ppweb.pages.dev/
                     </a>
                 </div>
-                <div class="item">
+                <!-- <div class="item">
                     <span>{{ langMap[lang].notRecommended }}</span>
-                </div>
+                </div> -->
             </div>
         </div>
         <!-- last release -->
         <div class="lastRelease">
-            <span>{{ langMap[lang].lastRelease }} {{ lastRelease.name }}</span>
+            <!-- <span>{{ langMap[lang].lastRelease }} {{ lastRelease.name }}</span> -->
             <span>
                 {{ langMap[lang].lastTime }}
                 {{ lastRelease.published_at }}
+            </span>
+            <span>
+                {{ langMap[lang].history }}
+                <a
+                    href="https://github.com/Sjj1024/PakePlus/releases"
+                    target="_blank"
+                    class="githubLink"
+                >
+                    Releases Page
+                </a>
             </span>
         </div>
     </div>
@@ -371,13 +384,12 @@ const vpData = useData()
 const lang = vpData.lang.value
 const pageData = vpData.page.value
 
-console.log('pageData', pageData)
-
 const langMap = {
     zh: {
-        titleTips: '我应该使用哪个版本？',
+        titleTips: 'PakePlus',
         lastRelease: '最后发布：',
         lastTime: '最后时间：',
+        history: '历史版本：',
         notRecommended: '不推荐，因为是 beta 版本，且功能没有客户端版本完善',
         mostPopular: '最流行：',
         oldSystem: '老系统：',
@@ -393,9 +405,10 @@ const langMap = {
         web4: '地址四：',
     },
     en: {
-        titleTips: 'Which version should I use?',
+        titleTips: 'PakePlus',
         lastRelease: 'Last Release: ',
         lastTime: 'Last Time: ',
+        history: 'History: ',
         notRecommended:
             "Not recommended, it's a beta version，and the function is not as complete as the client version",
         mostPopular: 'Most Popular: ',
@@ -427,6 +440,7 @@ const isDownPage = () => {
     )
 }
 
+// get last release
 const lastRelease = data[0] || {
     url: 'https://api.github.com/repos/Sjj1024/PakePlus/releases/207589840',
     assets_url:
@@ -434,12 +448,12 @@ const lastRelease = data[0] || {
     upload_url:
         'https://uploads.github.com/repos/Sjj1024/PakePlus/releases/207589840/assets{?name,label}',
     html_url:
-        'https://github.com/Sjj1024/PakePlus/releases/tag/PakePlus-v0.5.17',
+        'https://github.com/Sjj1024/PakePlus/releases/tag/PakePlus-v2.2.4',
     id: 207589840,
     node_id: 'RE_kwDOMvkdy84MX5HQ',
-    tag_name: 'PakePlus-v0.5.17',
+    tag_name: 'PakePlus-v2.2.4',
     target_commitish: '4fb9a11b57dccf84387ba9bfe83685f6c571cd41',
-    name: 'PakePlus v0.5.17',
+    name: 'PakePlus v2.2.4',
     draft: false,
     prerelease: false,
     created_at: '2025-03-22T05:21:55Z',
@@ -449,7 +463,7 @@ const lastRelease = data[0] || {
             url: 'https://api.github.com/repos/Sjj1024/PakePlus/releases/assets/239940761',
             id: 239940761,
             node_id: 'RA_kwDOMvkdy84OTTSZ',
-            name: 'PakePlus-0.5.17-1.x86_64.rpm',
+            name: 'PakePlus-2.2.4-1.x86_64.rpm',
             label: '',
             content_type: 'application/zip',
             state: 'uploaded',
@@ -458,13 +472,13 @@ const lastRelease = data[0] || {
             created_at: '2025-03-23T01:56:49Z',
             updated_at: '2025-03-23T01:56:50Z',
             browser_download_url:
-                'https://github.com/Sjj1024/PakePlus/releases/download/PakePlus-v0.5.17/PakePlus-0.5.17-1.x86_64.rpm',
+                'https://github.com/Sjj1024/PakePlus/releases/download/PakePlus-v2.2.4/PakePlus-2.2.4-1.x86_64.rpm',
         },
         {
             url: 'https://api.github.com/repos/Sjj1024/PakePlus/releases/assets/239939962',
             id: 239939962,
             node_id: 'RA_kwDOMvkdy84OTTF6',
-            name: 'PakePlus_0.5.17_aarch64.dmg',
+            name: 'PakePlus_2.2.4_aarch64.dmg',
             label: '',
             content_type: 'application/zip',
             state: 'uploaded',
@@ -473,13 +487,13 @@ const lastRelease = data[0] || {
             created_at: '2025-03-23T01:52:29Z',
             updated_at: '2025-03-23T01:52:30Z',
             browser_download_url:
-                'https://github.com/Sjj1024/PakePlus/releases/download/PakePlus-v0.5.17/PakePlus_0.5.17_aarch64.dmg',
+                'https://github.com/Sjj1024/PakePlus/releases/download/PakePlus-v2.2.4/PakePlus_2.2.4_aarch64.dmg',
         },
         {
             url: 'https://api.github.com/repos/Sjj1024/PakePlus/releases/assets/239940766',
             id: 239940766,
             node_id: 'RA_kwDOMvkdy84OTTSe',
-            name: 'PakePlus_0.5.17_amd64.AppImage',
+            name: 'PakePlus_2.2.4_amd64.AppImage',
             label: '',
             content_type: 'application/zip',
             state: 'uploaded',
@@ -488,13 +502,13 @@ const lastRelease = data[0] || {
             created_at: '2025-03-23T01:56:50Z',
             updated_at: '2025-03-23T01:56:52Z',
             browser_download_url:
-                'https://github.com/Sjj1024/PakePlus/releases/download/PakePlus-v0.5.17/PakePlus_0.5.17_amd64.AppImage',
+                'https://github.com/Sjj1024/PakePlus/releases/download/PakePlus-v2.2.4/PakePlus_2.2.4_amd64.AppImage',
         },
         {
             url: 'https://api.github.com/repos/Sjj1024/PakePlus/releases/assets/239940760',
             id: 239940760,
             node_id: 'RA_kwDOMvkdy84OTTSY',
-            name: 'PakePlus_0.5.17_amd64.deb',
+            name: 'PakePlus_2.2.4_amd64.deb',
             label: '',
             content_type: 'application/zip',
             state: 'uploaded',
@@ -503,13 +517,13 @@ const lastRelease = data[0] || {
             created_at: '2025-03-23T01:56:48Z',
             updated_at: '2025-03-23T01:56:48Z',
             browser_download_url:
-                'https://github.com/Sjj1024/PakePlus/releases/download/PakePlus-v0.5.17/PakePlus_0.5.17_amd64.deb',
+                'https://github.com/Sjj1024/PakePlus/releases/download/PakePlus-v2.2.4/PakePlus_2.2.4_amd64.deb',
         },
         {
             url: 'https://api.github.com/repos/Sjj1024/PakePlus/releases/assets/239941740',
             id: 239941740,
             node_id: 'RA_kwDOMvkdy84OTThs',
-            name: 'PakePlus_0.5.17_arm64-setup.exe',
+            name: 'PakePlus_2.2.4_arm64-setup.exe',
             label: '',
             content_type: 'application/zip',
             state: 'uploaded',
@@ -518,13 +532,13 @@ const lastRelease = data[0] || {
             created_at: '2025-03-23T02:01:43Z',
             updated_at: '2025-03-23T02:01:43Z',
             browser_download_url:
-                'https://github.com/Sjj1024/PakePlus/releases/download/PakePlus-v0.5.17/PakePlus_0.5.17_arm64-setup.exe',
+                'https://github.com/Sjj1024/PakePlus/releases/download/PakePlus-v2.2.4/PakePlus_2.2.4_arm64-setup.exe',
         },
         {
             url: 'https://api.github.com/repos/Sjj1024/PakePlus/releases/assets/239941733',
             id: 239941733,
             node_id: 'RA_kwDOMvkdy84OTThl',
-            name: 'PakePlus_0.5.17_arm64_en-US.msi',
+            name: 'PakePlus_2.2.4_arm64_en-US.msi',
             label: '',
             content_type: 'application/zip',
             state: 'uploaded',
@@ -533,13 +547,13 @@ const lastRelease = data[0] || {
             created_at: '2025-03-23T02:01:42Z',
             updated_at: '2025-03-23T02:01:43Z',
             browser_download_url:
-                'https://github.com/Sjj1024/PakePlus/releases/download/PakePlus-v0.5.17/PakePlus_0.5.17_arm64_en-US.msi',
+                'https://github.com/Sjj1024/PakePlus/releases/download/PakePlus-v2.2.4/PakePlus_2.2.4_arm64_en-US.msi',
         },
         {
             url: 'https://api.github.com/repos/Sjj1024/PakePlus/releases/assets/239941382',
             id: 239941382,
             node_id: 'RA_kwDOMvkdy84OTTcG',
-            name: 'PakePlus_0.5.17_x64-setup.exe',
+            name: 'PakePlus_2.2.4_x64-setup.exe',
             label: '',
             content_type: 'application/zip',
             state: 'uploaded',
@@ -548,13 +562,13 @@ const lastRelease = data[0] || {
             created_at: '2025-03-23T02:00:02Z',
             updated_at: '2025-03-23T02:00:03Z',
             browser_download_url:
-                'https://github.com/Sjj1024/PakePlus/releases/download/PakePlus-v0.5.17/PakePlus_0.5.17_x64-setup.exe',
+                'https://github.com/Sjj1024/PakePlus/releases/download/PakePlus-v2.2.4/PakePlus_2.2.4_x64-setup.exe',
         },
         {
             url: 'https://api.github.com/repos/Sjj1024/PakePlus/releases/assets/239939963',
             id: 239939963,
             node_id: 'RA_kwDOMvkdy84OTTF7',
-            name: 'PakePlus_0.5.17_x64.dmg',
+            name: 'PakePlus_2.2.4_x64.dmg',
             label: '',
             content_type: 'application/zip',
             state: 'uploaded',
@@ -563,13 +577,13 @@ const lastRelease = data[0] || {
             created_at: '2025-03-23T01:52:29Z',
             updated_at: '2025-03-23T01:52:30Z',
             browser_download_url:
-                'https://github.com/Sjj1024/PakePlus/releases/download/PakePlus-v0.5.17/PakePlus_0.5.17_x64.dmg',
+                'https://github.com/Sjj1024/PakePlus/releases/download/PakePlus-v2.2.4/PakePlus_2.2.4_x64.dmg',
         },
         {
             url: 'https://api.github.com/repos/Sjj1024/PakePlus/releases/assets/239941381',
             id: 239941381,
             node_id: 'RA_kwDOMvkdy84OTTcF',
-            name: 'PakePlus_0.5.17_x64_en-US.msi',
+            name: 'PakePlus_2.2.4_x64_en-US.msi',
             label: '',
             content_type: 'application/zip',
             state: 'uploaded',
@@ -578,7 +592,7 @@ const lastRelease = data[0] || {
             created_at: '2025-03-23T02:00:02Z',
             updated_at: '2025-03-23T02:00:02Z',
             browser_download_url:
-                'https://github.com/Sjj1024/PakePlus/releases/download/PakePlus-v0.5.17/PakePlus_0.5.17_x64_en-US.msi',
+                'https://github.com/Sjj1024/PakePlus/releases/download/PakePlus-v2.2.4/PakePlus_2.2.4_x64_en-US.msi',
         },
         {
             url: 'https://api.github.com/repos/Sjj1024/PakePlus/releases/assets/239939968',
@@ -593,7 +607,7 @@ const lastRelease = data[0] || {
             created_at: '2025-03-23T01:52:31Z',
             updated_at: '2025-03-23T01:52:31Z',
             browser_download_url:
-                'https://github.com/Sjj1024/PakePlus/releases/download/PakePlus-v0.5.17/PakePlus_aarch64.app.tar.gz',
+                'https://github.com/Sjj1024/PakePlus/releases/download/PakePlus-v2.2.4/PakePlus_aarch64.app.tar.gz',
         },
         {
             url: 'https://api.github.com/repos/Sjj1024/PakePlus/releases/assets/239939969',
@@ -608,13 +622,13 @@ const lastRelease = data[0] || {
             created_at: '2025-03-23T01:52:31Z',
             updated_at: '2025-03-23T01:52:32Z',
             browser_download_url:
-                'https://github.com/Sjj1024/PakePlus/releases/download/PakePlus-v0.5.17/PakePlus_x64.app.tar.gz',
+                'https://github.com/Sjj1024/PakePlus/releases/download/PakePlus-v2.2.4/PakePlus_x64.app.tar.gz',
         },
     ],
     tarball_url:
-        'https://api.github.com/repos/Sjj1024/PakePlus/tarball/PakePlus-v0.5.17',
+        'https://api.github.com/repos/Sjj1024/PakePlus/tarball/PakePlus-v2.2.4',
     zipball_url:
-        'https://api.github.com/repos/Sjj1024/PakePlus/zipball/PakePlus-v0.5.17',
+        'https://api.github.com/repos/Sjj1024/PakePlus/zipball/PakePlus-v2.2.4',
     body: '## 我应该下载哪个版本？\r\n\r\n### MacOS\r\n\r\n-   MacOS intel 芯片: x64.dmg\r\n-   MacOS apple M 芯片: aarch64.dmg\r\n\r\n### Linux\r\n\r\n-   Linux 64 位: amd64.deb/amd64.rpm\r\n-   Linux arm64 architecture: arm64.deb/aarch64.rpm\r\n-   Linux armv7 架构: armhf.deb/armhfp.rpm\r\n\r\n### Windows\r\n\r\n-   64 位: x64-setup.exe\r\n-   arm64 架构: arm64-setup.exe',
 }
 
@@ -850,18 +864,6 @@ const proxyGithub = (url, type = 1) => {
                 gap: 10px;
                 font-size: 1rem;
 
-                a {
-                    color: var(--vp-c-brand-1);
-                    transition: all 0.2s ease;
-                    min-width: 150px;
-
-                    &:hover {
-                        // color: rgb(58, 58, 254);
-                        font-weight: bold;
-                        transform: translateY(-2px);
-                    }
-                }
-
                 .githubLink {
                     margin-left: 20px;
                 }
@@ -882,6 +884,18 @@ const proxyGithub = (url, type = 1) => {
         font-size: 14px;
         color: var(--vp-c-text-2);
         gap: 10px;
+    }
+}
+
+a {
+    color: var(--vp-c-brand-1);
+    transition: all 0.2s ease;
+    min-width: 150px;
+
+    &:hover {
+        // color: rgb(58, 58, 254);
+        font-weight: bold;
+        transform: translateY(-2px);
     }
 }
 </style>
